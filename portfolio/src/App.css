@@ -1,42 +1,99 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+*{
+  box-sizing: border-box;
+}
+.App{
+  scroll-behavior: smooth;
+  min-width: 800px;
+}
+.navbar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+}
+.home, .skills, .project, .contact{
+  font-weight: bold;
+}
+.active{
+  background-color: #f34079;
+  padding: 5px 8px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+.nav-links{
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.nav-links li a {
+  text-decoration: inherit;
+  color: #ddd;
+}
+.active{
+  color: #fc894d;
+}
+/*
+.nav-links li .links ::after{
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: O;
+  transform: translateX(-50%) scaleX(0);
+  transform-origin: left;
+  width: 50%;
+  height: 2px;
+  background: tomato;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+.nav-links li .links :hover::after{
+  transform: translateX(-50%) scale(1);
+}
+*/
+.nav-links a img{
+  width: 30px;
+}
+.nav-links a img{
+  padding: 2px;
+  border-radius: 5px;
+  transition: transform 0.3s ease;
+}
+.nav-links a img:hover{
+  transform: scale(1.2)
+}
+.hero-content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px 60px;
+}
+
+.intro{
+  padding: 10px;
   text-align: center;
+  border-radius: 8px;
+  cursor: pointer;
+  background-image: linear-gradient(135deg, #f34079 40%, #fc894d);
+  transition: transform 0.3s ease, background-image 1s ease;
 }
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.intro:hover{
+  transform: scale(1.1);
+  background-image: linear-gradient(135deg, #fc894d 40%, #f34079);
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+@media(min-width: 728px){
+  .hero-content{
+    flex-direction: row;
+    justify-content: space-between;
   }
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.rm-image img{
+  border-radius: 50%;
+  border: 5px solid gray;
 }
-
-.card {
-  padding: 2em;
+.dev{
+  color: #f34079;
+  font-weight: 800;
 }
-
-.read-the-docs {
-  color: #888;
+footer{
+  text-align: center;
 }
