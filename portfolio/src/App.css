@@ -5,18 +5,20 @@
   scroll-behavior: smooth;
   min-width: 800px;
 }
+.logo{
+  color: white;
+}
 .navbar{
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px 50px;
+  background-color: #222;
+  position: sticky;
+  top: 0;
 }
-.home, .skills, .project, .contact{
-  font-weight: bold;
-}
+
 .active{
-  background-color: #f34079;
-  padding: 5px 8px;
   border-radius: 8px;
   font-weight: bold;
 }
@@ -28,10 +30,20 @@
 }
 .nav-links li a {
   text-decoration: inherit;
-  color: #ddd;
+  color: white;
 }
-.active{
-  color: #fc894d;
+#contact{
+  border: 1px solid #ddd;
+  padding: 5px 8px;
+}
+.connect{
+  border: 1px solid #ddd;
+  padding: 5px 8px;
+  text-decoration: inherit;
+  color: inherit;
+}
+.connect:hover{
+  transform: scale(1.1);
 }
 /*
 .nav-links li .links ::after{
@@ -69,7 +81,7 @@
 }
 
 .intro{
-  padding: 10px;
+  padding: 10px 0;
   text-align: center;
   border-radius: 8px;
   cursor: pointer;
@@ -85,15 +97,303 @@
     flex-direction: row;
     justify-content: space-between;
   }
+  .rm-image img{
+    width: 300px;
+  }
 }
 .rm-image img{
   border-radius: 50%;
-  border: 5px solid gray;
+  border: 5px solid #ddd;
+  width: 250px;
 }
 .dev{
   color: #f34079;
   font-weight: 800;
 }
 footer{
+  width: 100%;
   text-align: center;
+  margin-top: 60px;
 }
+/*cercle animé*/
+/* Container */
+.skills-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+/* Card pour chaque skill */
+.circle-skill {
+  text-align: center;
+  position: relative;
+}
+
+/* ---- CERCLE DE BASE ---- */
+.progress-circle {
+  --size: 130px;
+  --bar-width: 10px;
+
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  animation: pulse 3s infinite ease-in-out;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+/* ---- GLASSMORPHISM ---- */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+}
+
+/* ---- GLOW MULTICOLOR ---- */
+.neon {
+  box-shadow:
+    0 0 20px #8a2be2,
+    0 0 30px #4f8cff,
+    0 0 40px #00eaff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Barre circulaire */
+.progress-circle::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  padding: var(--bar-width);
+
+  background: conic-gradient(
+    #4f8cff calc(var(--value) * 1%),
+    #4f8cff calc(var(--value) * 1%),
+    #00eaff calc(var(--value) * 1%),
+    #222 calc(var(--value) * 1%)
+  );
+
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - var(--bar-width)), black 0);
+}
+
+/* Icone */
+.icon {
+  font-size: 42px;
+  z-index: 5;
+  color: #00eaff;
+  text-shadow: 0 0 20px #00eaff;
+  transition: 0.3s ease;
+}
+
+/* ---- HOVER ANIMATION ---- */
+.progress-circle:hover {
+  transform: scale(1.15) rotate(8deg);
+  box-shadow:
+    0 0 30px #8a2be2,
+    0 0 50px #4f8cff,
+    0 0 70px #00eaff;
+}
+
+.progress-circle:hover .icon {
+  transform: scale(1.2);
+  text-shadow:
+    0 0 30px #8a2be2,
+    0 0 40px #4f8cff,
+    0 0 50px #00eaff;
+}
+
+/* ---- TOOLTIP ---- */
+.tooltip {
+  position: absolute;
+  bottom: -2px;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(8px);
+  padding: 6px 12px;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 13px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: 0.3s ease;
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.progress-circle:hover .tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Nom du skill */
+.skill-name {
+  margin-top: 15px;
+  color: inherit;
+  font-size: 18px;
+}
+
+/* ---- ANIMATION PULSE ---- */
+@keyframes pulse {
+  0% {
+    box-shadow:
+      0 0 15px #8a2be2,
+      0 0 20px #4f8cff,
+      0 0 30px #00eaff;
+  }
+  50% {
+    box-shadow:
+      0 0 30px #8a2be2,
+      0 0 40px #4f8cff,
+      0 0 50px #00eaff;
+  }
+  100% {
+    box-shadow:
+      0 0 15px #8a2be2,
+      0 0 20px #4f8cff,
+      0 0 30px #00eaff;
+  }
+}
+
+/* Animation du cercle */
+@keyframes fill-circle {
+  from {
+    --value: 0;
+  }
+}
+/*projects */
+.projects-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  width: 60%;
+}
+
+.tabs button {
+  padding: 10px 20px;
+  border: 1px solid #ddd;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+  height: 50px;
+  width: 35%;
+}
+#tab1{
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+}
+#tab3{
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
+.tabs button.active {
+  background-image: linear-gradient(135deg, #ff4444 40%, #fc894d);
+}
+.tabs button:hover{
+  background-image: linear-gradient(135deg, #ff4444 40%, #fc894d);
+}
+.tab-content {
+  animation: fade 0.4s ease;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Container grid (optionnel) */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+/* Card base */
+.project-card{
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  min-height: 300px;
+  min-width: 600px;
+  color: white;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-end;
+  padding: 24px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+  transition: transform 260ms ease;
+  cursor: pointer;
+}
+
+/* sub content stays above overlay */
+.project-content{
+  position: relative;
+  z-index: 2;
+}
+
+/* Smooth scale on hover (optional) */
+.project-card:hover{
+  transform: translateY(-6px);
+}
+
+/* THE REVEAL OVERLAY: appears from top -> bottom */
+.project-card::before{
+  content: "";
+  position: absolute;
+  inset: 0;                 /* top:0; left:0; right:0; bottom:0 */
+  background: linear-gradient(180deg, rgba(0,123,255,0.70) 0%, #ff4444 40%);
+  transform-origin: top;
+  transform: scaleY(0);     /* collapsed */
+  transition: transform 420ms cubic-bezier(.22,.9,.38,1); /* smooth fluid */
+  z-index: 1;
+  pointer-events: none;     /* let clicks go through to card */
+}
+
+/* ON HOVER -> expand overlay from top to bottom */
+.project-card:hover::before,
+.project-card:focus::before,
+.project-card:focus-within::before{
+  transform: scaleY(1);     /* fully visible */
+}
+
+/* Option: change content color when overlay visible */
+.project-card:hover .project-content h3,
+.project-card:focus .project-content h3{
+  color: #fff;
+  transition: color 200ms ease;
+}
+
+/* button style */
+.btn{
+  margin-top: 12px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+}
+
+/* small screens tweak */
+

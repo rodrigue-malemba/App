@@ -1,8 +1,7 @@
-import React from "react";
 
 const About = () => {
   return (
-    <section id="about" style={styles.section}>
+    <section id="about">
       <h2>À propos de moi</h2>
       <p>
         Passionné par le développement frontend, je crée des interfaces web modernes, performantes et accessibles. 
@@ -17,14 +16,6 @@ const About = () => {
       </ul>
     </section>
   );
-};
-
-const styles = {
-  section: {
-    padding: "6rem 2rem",
-    maxWidth: "800px",
-    margin: "0 auto",
-  },
 };
 
 export default About;

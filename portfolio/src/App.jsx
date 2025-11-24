@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import './App.css'
 import {Route, Routes} from 'react-router-dom'
 import Navbar from './components/Navbar.jsx'
@@ -8,6 +7,7 @@ import Projects from './components/Projects.jsx'
 import Skills from './components/Skills.jsx'
 import Contact from './components/Contact.jsx'
 import Footer from './components/Footer.jsx'
+
 function App() {
 
   return (

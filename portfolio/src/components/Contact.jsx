@@ -2,7 +2,7 @@ import React from "react";
 
 const Contact = () => {
   return (
-    <section id="contact" style={styles.section}>
+    <section className="contact" style={styles.section}>
       <h2>Contactez-moi</h2>
       <form style={styles.form} onSubmit={(e) => e.preventDefault()}>
         <input type="text" placeholder="Nom" required />
