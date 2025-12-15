@@ -16,6 +16,7 @@
   background-color: #222;
   position: sticky;
   top: 0;
+  z-index: 1000;
 }
 
 .active{
@@ -285,7 +286,7 @@ footer{
   padding: 10px 20px;
   border: 1px solid #ddd;
   background: transparent;
-  color: white;
+  color: inherit;
   cursor: pointer;
   transition: 0.3s;
   height: 50px;

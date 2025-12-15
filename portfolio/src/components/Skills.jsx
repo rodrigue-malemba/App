@@ -2,8 +2,8 @@ import { FaReact, FaJs, FaHtml5, FaCss3Alt, FaGitAlt, FaNodeJs, FaGithub } from 
 const skills = [
   { name: "React", level: 85, icon: <FaReact /> },
   { name: "JavaScript", level: 90, icon: <FaJs /> },
-  { name: "HTML5", level: 95, icon: <FaHtml5 /> },
-  { name: "CSS3", level: 90, icon: <FaCss3Alt /> },
+  { name: "HTML 5", level: 95, icon: <FaHtml5 /> },
+  { name: "CSS 3", level: 90, icon: <FaCss3Alt /> },
   { name: "Git", level: 80, icon: <FaGitAlt /> },
   { name: "GitHub", level: 80, icon: <FaGithub /> },
   { name: "Node.js", level: 70, icon: <FaNodeJs /> },
