@@ -1,34 +1,35 @@
-import { FaReact, FaJs, FaHtml5, FaCss3Alt, FaGitAlt, FaNodeJs, FaGithub } from "react-icons/fa";
-const skills = [
-  { name: "React", level: 85, icon: <FaReact /> },
-  { name: "JavaScript", level: 90, icon: <FaJs /> },
-  { name: "HTML 5", level: 95, icon: <FaHtml5 /> },
-  { name: "CSS 3", level: 90, icon: <FaCss3Alt /> },
-  { name: "Git", level: 80, icon: <FaGitAlt /> },
-  { name: "GitHub", level: 80, icon: <FaGithub /> },
-  { name: "Node.js", level: 70, icon: <FaNodeJs /> },
-];
+import { useLanguage } from "../context/LanguageContext.jsx";
 
 export default function Skills() {
+  const { t } = useLanguage();
+  const groups = t("skills.groups");
+  const skillGroups = Array.isArray(groups) ? groups : [];
+
   return (
-    <>
-    <h2>Skills</h2>
-    <p>Dans mon travail de développeur frontend, j’utilise un ensemble d’outils et de technologies modernes pour créer des interfaces rapides, intuitives et performantes. Ma maîtrise de React, JavaScript, HTML5 et CSS3 me permet de concevoir des applications web dynamiques et élégantes.
-J’intègre également au quotidien Git et GitHub pour assurer une gestion propre et structurée du code, ainsi que Node.js, qui me permet de développer des fonctionnalités côté serveur et d’optimiser mes workflows.</p>
-    <div className="skills-container">
-      {skills.map((skill) => (
-        <div className="circle-skill" key={skill.name}>
-          <div
-            className="progress-circle neon glass"
-            style={{ "--value": skill.level }}
-          >
-            <div className="icon">{skill.icon}</div>
-            <div className="tooltip"> {skill.level}%</div>
-          </div>
-          <p className="skill-name">{skill.name}</p>
+    <section className="skills-section" id="skills">
+      <div className="section-shell">
+        <header className="section-header">
+          <p className="section-kicker">{t("skills.kicker")}</p>
+          <h2 className="section-title">{t("skills.title")}</h2>
+          <p className="section-subtitle">{t("skills.subtitle")}</p>
+        </header>
+
+        <div className="skills-grid">
+          {skillGroups.map((group) => (
+            <div className="skill-card" key={group.title}>
+              <h3>{group.title}</h3>
+              <p>{group.description}</p>
+              <div className="skill-tags">
+                {group.items.map((item) => (
+                  <span className="skill-tag" key={item}>
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
-    </>
+      </div>
+    </section>
   );
 }

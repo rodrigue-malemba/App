@@ -1,28 +1,60 @@
-import { NavLink } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
-
+import { useLanguage } from "../context/LanguageContext.jsx";
 
 const Navbar = () => {
+  const { language, setLanguage, t } = useLanguage();
+
+  const navLinks = [
+    { href: "#about", label: t("nav.about") },
+    { href: "#projects", label: t("nav.work") },
+    { href: "#skills", label: t("nav.stack") },
+    { href: "#contact", label: t("nav.contact") },
+  ];
 
   return (
-    <>
     <nav className="navbar">
-      <h2 className="logo" alt="logo">Rodrigue</h2>
-      <ul className="nav-links">
-        <li><NavLink to="/" className={({isActive}) =>(isActive ? "active" : "home")} >Home</NavLink></li>
-        <li><NavLink to="/Skills" className={({isActive}) => (isActive ? "active" : "skills")}>Skills</NavLink></li>
-        <li><NavLink to="/Projects" className={({isActive}) => (isActive ? "active" : "project")}>Projects</NavLink></li>
-        <li><a href="https://facebook.com" target="_blank" rel="noopener noreferrer"><img src="/icons/reseaux-sociaux.png"/></a></li>
-        <li><a href="https://instagram.com" target="blank" rel="noopener noreferrer"><img src="/icons/instagram.png"/></a></li>
-        <li><a href="https://www.linkedin.com/in/rodrigue-malemba-98637b175/" target="blank" rel="noopener noreferrer"><img src="/icons/sociale.png"/></a></li>
-        <li><a href="https://github.com/rodrigue-malemba" target="blank" rel="noopener noreferrer"><img src="/icons/github.png"/></a></li>
-        <li id="contact"><NavLink to="/Contact" className={({isActive}) => (isActive ? "active" : "contact")} >Let's Connect</NavLink></li>
-      </ul>
+      <div className="nav-shell">
+        <div className="nav-brand">
+          <a className="nav-logo" href="#home">
+            Rodrigue Malemba
+          </a>
+          <span className="nav-title">{t("nav.title")}</span>
+        </div>
+
+        <div className="nav-links">
+          {navLinks.map((link) => (
+            <a key={link.href} className="nav-link" href={link.href}>
+              {link.label}
+            </a>
+          ))}
+        </div>
+
+        <div className="nav-actions">
+          <div className="lang-toggle" role="group" aria-label="Language">
+            <button
+              type="button"
+              className={`lang-btn ${language === "fr" ? "active" : ""}`}
+              aria-pressed={language === "fr"}
+              onClick={() => setLanguage("fr")}
+            >
+              FR
+            </button>
+            <button
+              type="button"
+              className={`lang-btn ${language === "en" ? "active" : ""}`}
+              aria-pressed={language === "en"}
+              onClick={() => setLanguage("en")}
+            >
+              EN
+            </button>
+          </div>
+
+          <a className="nav-cta" href="#contact">
+            {t("nav.cta")}
+          </a>
+        </div>
+      </div>
     </nav>
-    </>
   );
 };
-
 
 export default Navbar;

@@ -1,18 +1,49 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap");
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+:root {
+  --font-sans: "Manrope", "Segoe UI", sans-serif;
+  --font-display: "Playfair Display", serif;
+  --ink: #0f172a;
+  --muted: #475569;
+  --muted-strong: #64748b;
+  --muted-soft: #94a3b8;
+  --accent: #f97316;
+  --accent-strong: #ea580c;
+  --accent-cool: #0ea5e9;
+  --accent-cool-strong: #0284c7;
+  --surface: #ffffff;
+  --surface-soft: #f8fafc;
+  --border: #e2e8f0;
+
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  font-weight: 400;
+  color: var(--ink);
+  background-color: var(--surface-soft);
+  color-scheme: light;
 }
-@media(prefers-color-scheme: dark){
-  body{
-    color: white;
-  }
+
+html {
+  scroll-behavior: smooth;
 }
-@media(prefers-color-scheme: light){
-  body{
-    color: black;
-  }
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100%;
+  color: var(--ink);
+  background: radial-gradient(circle at top left, #fff7ed 0%, #f8fafc 45%, #e2e8f0 100%);
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
 }

@@ -1,82 +1,93 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useLanguage } from "../context/LanguageContext.jsx";
 
-export default function Projects({title, subtitle}) {
-  const [activeTab, setActiveTab] = useState("tab1");
-  const project1 = [
-    {id: 1, name: ""}
-  ];
+export default function Projects({ title, subtitle }) {
+  const { t } = useLanguage();
+  const projects = t("projects.items");
+  const items = Array.isArray(projects) ? projects : [];
+  const [activeTab, setActiveTab] = useState(items[0]?.id ?? "tab1");
+  const activeProject = items.find((project) => project.id === activeTab) ?? items[0];
+  const resolvedTitle = title || t("projects.title");
+  const resolvedSubtitle = subtitle || t("projects.subtitle");
+
   return (
-    <>
-    <h2>Projects</h2>
-    <div className="projects-container">
-      <p>Découvrez une sélection de projets que j’ai réalisés pour mettre en pratique mes compétences techniques et ma créativité. Chaque application reflète mon souci du détail, ma maîtrise des technologies modernes
-         et ma capacité à transformer une idée en une expérience web fonctionnelle, fluide et intuitive. Ces projets illustrent mon évolution en tant que développeur frontend et ma volonté constante d’apprendre, d’innover 
-         et de proposer des solutions adaptées aux besoins des utilisateurs.</p>
-      {/* ------- TABS ------- */}
-      <div className="tabs">
-        <button
-          className={activeTab === "tab1" ? "active" : ""}
-          onClick={() => setActiveTab("tab1")}
-          id="tab1"
-        >
-          Tab-1
-        </button>
+    <section className="projects-section" id="projects">
+      <div className="section-shell">
+        <header className="section-header">
+          <p className="section-kicker">{t("projects.kicker")}</p>
+          <h2 className="section-title">{resolvedTitle}</h2>
+          <p className="section-subtitle">{resolvedSubtitle}</p>
+        </header>
 
-        <button
-          className={activeTab === "tab2" ? "active" : ""}
-          onClick={() => setActiveTab("tab2")}
+        <div
+          className="project-tabs"
+          role="tablist"
+          aria-label="Categories de projets"
         >
-          Tab-2
-        </button>
+          {items.map((project) => (
+            <button
+              key={project.id}
+              id={`project-tab-${project.id}`}
+              className={`project-tab ${
+                activeTab === project.id ? "is-active" : ""
+              }`}
+              type="button"
+              role="tab"
+              aria-selected={activeTab === project.id}
+              aria-controls="project-panel"
+              onClick={() => setActiveTab(project.id)}
+            >
+              <span className="project-tab-label">{project.label}</span>
+              <span className="project-tab-title">{project.tabTitle}</span>
+            </button>
+          ))}
+        </div>
 
-        <button
-          className={activeTab === "tab3" ? "active" : ""}
-          onClick={() => setActiveTab("tab3")}
-          id="tab3"
+        <div
+          className="project-panel"
+          id="project-panel"
+          role="tabpanel"
+          aria-labelledby={activeProject ? `project-tab-${activeProject.id}` : undefined}
         >
-          Tab-3
-        </button>
-      </div>
-
-      {/* ------- CONTENT ------- */}
-      <div className="tab-content">
-        {activeTab === "tab1" && (
-          <>
-          <article className="project-card" tabIndex="0" style={{ backgroundImage: `url("${"/images/project1.png"}")` }}>
-              <div className="project-content">
-                <h3>Law firm web site</h3>
-                <a href="https://lawfirmdms.netlify.app/" target="blank">
-                  <button className="btn">Voir</button>
-                </a>
+          {activeProject && (
+            <article className="project-card">
+              <div className="project-media">
+                <img
+                  src={activeProject.image}
+                  alt={activeProject.title}
+                  loading="lazy"
+                />
+                <span className="project-chip">{activeProject.badge}</span>
+              </div>
+              <div className="project-body">
+                <p className="project-eyebrow">{activeProject.label}</p>
+                <h3 className="project-name">{activeProject.title}</h3>
+                <p className="project-description">{activeProject.description}</p>
+                <div className="project-tags">
+                  {activeProject.stack.map((item) => (
+                    <span className="project-tag" key={item}>
+                      {item}
+                    </span>
+                  ))}
                 </div>
+                <div className="project-actions">
+                  <a
+                    className="project-link"
+                    href={activeProject.link}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {t("projects.action")}
+                  </a>
+                  <span className="project-link-note">
+                    {t("projects.note")}
+                  </span>
+                </div>
+              </div>
             </article>
-          </>
-        )}
-
-        {activeTab === "tab2" && (
-          <div className="project-card" style={{backgroundImage: `url(${"/images/project2.png"})`, backgroundSize: "cover"}}>
-            <div className="project-content">
-            <h3>E-commerce web site</h3>
-            <p>Une application de vente en ligne</p>
-            <p><strong>Technologies :</strong> React, CSS, LocalStorage</p>
-            <a href="https://macrom.netlify.app/" target="blank">
-              <button className="btn">Voir</button>
-            </a>
-            </div>
-          </div>
-        )}
-
-        {activeTab === "tab3" && (
-          <div className="project-card" style={{backgroundImage: `url(${"/images/project3.png"})`, backgroundSize: "cover"}}>
-            <div className="project-content">
-            <h3>Personnel portfolio</h3>
-            <a href="https://portfoliorodrigue.netlify.app/" target="blank"><button className="btn">voir</button></a>
-            </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
-    </div>
-    </>
+    </section>
   );
 }

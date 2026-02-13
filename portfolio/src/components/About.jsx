@@ -1,19 +1,28 @@
+import { useLanguage } from "../context/LanguageContext.jsx";
 
 const About = () => {
+  const { t } = useLanguage();
+  const cards = t("about.cards");
+  const aboutCards = Array.isArray(cards) ? cards : [];
+
   return (
-    <section id="about">
-      <h2>À propos de moi</h2>
-      <p>
-        Passionné par le développement frontend, je crée des interfaces web modernes, performantes et accessibles. 
-        J’aime transformer les designs en expériences utilisateur fluides.
-      </p>
-      <h3>Stack principale :</h3>
-      <ul>
-        <li>HTML / CSS / JavaScript</li>
-        <li>React</li>
-        <li>Git / GitHub</li>
-        <li>Figma pour le design</li>
-      </ul>
+    <section className="about-section" id="about">
+      <div className="section-shell">
+        <header className="section-header">
+          <p className="section-kicker">{t("about.kicker")}</p>
+          <h2 className="section-title">{t("about.title")}</h2>
+          <p className="section-subtitle">{t("about.subtitle")}</p>
+        </header>
+
+        <div className="about-grid">
+          {aboutCards.map((card) => (
+            <div className="about-card" key={card.title}>
+              <h3>{card.title}</h3>
+              <p>{card.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
     </section>
   );
 };

@@ -1,24 +1,70 @@
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
-
-//<img src="https://cdn-icons-png.flaticon.com/512/892/892498.png" alt="down-arrow" className="down-arrow"/>
+import { useLanguage } from "../context/LanguageContext.jsx";
 
 const Hero = () => {
-    useEffect(() => {
-    document.documentElement.style.scrollBehavior = "smooth";
-  }, []);
+  const { t } = useLanguage();
+  const highlights = t("hero.highlights");
+  const heroHighlights = Array.isArray(highlights) ? highlights : [];
+  const cardTags = t("hero.card.tags");
+  const heroTags = Array.isArray(cardTags) ? cardTags : [];
+
   return (
-    <section className="hero">
-      <div className="hero-content">
-        <div>
-          <h2 className="intro">Welcome to my Portfolio</h2>
-          <h2>Hi, I'm rodrigue MALEMBA</h2>
-          <h2 className="dev">Frontend Developper.</h2>
-          <p>Je suis Développeur web frontend passionné, <p>spécialisé dans la création d'applications web performantes et intuitives.</p> Curieux d'apprendre des nouvelles technologies</p>
-          <Link to="/Contact" className="connect">Let's Connect</Link>
+    <section className="hero" id="home">
+      <div className="hero-shell">
+        <div className="hero-content">
+          <p className="hero-kicker">{t("hero.kicker")}</p>
+          <h1 className="hero-title">{t("hero.title")}</h1>
+          <p className="hero-lead">{t("hero.lead")}</p>
+          <div className="hero-actions">
+            <a className="btn btn-primary" href="#projects">
+              {t("hero.primaryCta")}
+            </a>
+            <a className="btn btn-ghost" href="#contact">
+              {t("hero.secondaryCta")}
+            </a>
+          </div>
+          <div className="hero-highlights">
+            {heroHighlights.map((item) => (
+              <span className="hero-highlight" key={item}>
+                {item}
+              </span>
+            ))}
+          </div>
         </div>
-        <div className="rm-image">
-          <img src="https://avatars.githubusercontent.com/u/141469507?v=4" width="200px"/>
+
+        <div className="hero-visual">
+          <div className="hero-card">
+            <div className="hero-card-top">
+              <div className="hero-avatar">
+                <img
+                  src="https://avatars.githubusercontent.com/u/141469507?v=4"
+                  alt={t("hero.card.name")}
+                />
+              </div>
+              <div>
+                <p className="hero-card-name">{t("hero.card.name")}</p>
+                <p className="hero-card-role">{t("hero.card.role")}</p>
+              </div>
+            </div>
+            <div className="hero-card-info">
+              <div>
+                <span>{t("hero.card.meta.location")}</span>
+                <strong>{t("hero.card.values.location")}</strong>
+              </div>
+              <div>
+                <span>{t("hero.card.meta.focus")}</span>
+                <strong>{t("hero.card.values.focus")}</strong>
+              </div>
+              <div>
+                <span>{t("hero.card.meta.availability")}</span>
+                <strong>{t("hero.card.values.availability")}</strong>
+              </div>
+            </div>
+            <div className="hero-card-tags">
+              {heroTags.map((tag) => (
+                <span key={tag}>{tag}</span>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
